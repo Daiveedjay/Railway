@@ -4,7 +4,7 @@ import { get } from "axios";
 const app = express();
 
 // Simple route to fetch and return a random joke
-app.get("/random-joke", async (req, res) => {
+app.get("/railway-random-joke", async (_, res) => {
   try {
     // API call to get a random joke
     const response = await get(
@@ -26,6 +26,4 @@ app.get("/random-joke", async (req, res) => {
 
 // Server listens on the environment-defined port (default 3000)
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+app.listen(port, () => console.log(`Server running on port ${port}`));
