@@ -15,6 +15,7 @@ app.get("/railway-random-joke", async (_, res) => {
       success: true,
       joke: response.data,
     });
+
     console.log("My Joke", response.data);
   } catch (error) {
     console.error("Error fetching joke:", error);
@@ -24,6 +25,24 @@ app.get("/railway-random-joke", async (_, res) => {
     });
   }
 });
+
+// Warm-up route to minimize cold start delays
+app.get("/warmup", (_, res) =>
+  res.status(200).send("Brewing coffee with Railway... 🍵")
+);
+
+// Ping the warm-up route when cron job runs
+const pingWarmup = async () => {
+  try {
+    await get("https://serverless-railway.up.railway.app/warmup");
+    console.log("Warm-up ping successful");
+  } catch (error) {
+    console.error("Error pinging warm-up:", error);
+  }
+};
+
+// Run the pingWarmup function on server start
+pingWarmup();
 
 // Server listens on the environment-defined port (default 3000)
 const port = 3000;
