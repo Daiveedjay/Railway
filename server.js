@@ -1,5 +1,5 @@
-import express from "express";
-import { get } from "axios";
+const express = require("express");
+const { get } = require("axios");
 
 const app = express();
 
