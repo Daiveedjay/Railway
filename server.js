@@ -3,7 +3,7 @@ import { get } from "axios";
 
 const app = express();
 
-// Simple route to fetch and return a random joke
+// Route to fetch and return a random joke
 app.get("/railway-random-joke", async (_, res) => {
   try {
     // API call to get a random joke
@@ -15,6 +15,7 @@ app.get("/railway-random-joke", async (_, res) => {
       success: true,
       joke: response.data,
     });
+    console.log("My Joke", response.data);
   } catch (error) {
     console.error("Error fetching joke:", error);
     res.status(500).json({
